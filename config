@@ -1,3 +1,4 @@
 #appunti sulla configurazione del sistema
 
 cv 
+espeak -v it "buon viaggio"
