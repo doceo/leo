@@ -24,11 +24,15 @@ while (cv.WaitKey(15)==-1):
     if face:
 		print "ciao!"
 		
+		#il vettore face in quarta posizione (indice 3) contiene il la lunghezza della diagonale
 		dist = face[3]
-		
 		#print dist
+	
+		#ricaviamo l'ascissa del punto medio, così da far ruotare il servo motore dell'assex 
 		assex = mov_or(face[2][0])
 		print assex
+		
+		#inviamo alla porta seriale l'ascissa del punto medio
 		invia(assex)
 		
 		if (dist < distHold - 9):
