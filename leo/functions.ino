@@ -39,6 +39,7 @@ if (duration == 0)
 
 long microsecondsToCentimeters(long microseconds)
   {
+   int cmconv = 59; 
    return microseconds / cmconv;
   }
   
