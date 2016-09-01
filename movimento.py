@@ -1,19 +1,34 @@
 #!/usr/bin/python
 
 
-def mov_or(pm):
-    fine = 640
-    inizio = int(fine/15)
-    passo = inizio
-    col = 0;
+def gira(pm):
+
+		fineX = 640
+		inizioX = int(fineX/10)
+		passoX = inizioX
 	
-    #print pm
+		fineY = 480
+		inizioY = int(fineY/10)    
+		inizioY
+		passoY = inizioY
+    
+		col = 1;
+		rig = 1;
 	
-    for i in range (0, fine, passo):
-    	
-    	print i
-        if(pm < i):
-            return col
+		print pm
+	
+		for i in range (0, fineX, passoX):
+		
+			if(pm[0] < i):
+				break
+			col=col+1
+
+		for j in range (0, fineY, passoY):
+		
+			if(pm[1] < j):
+				break
+			rig=rig+1
         
-        col=col+1
-        if (col==10): return 10	
+		asseXY=(rig, col)
+	
+		return asseXY
