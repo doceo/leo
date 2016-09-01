@@ -16,21 +16,25 @@ Servo serY;
 void setup() {
 Serial.begin(9600); // set the baud rate
 serX.attach(9);
-serX.attach(10);
+serY.attach(10);
 
 }
 void loop() {
 
+
 if(Serial.available()){ // only send data back if data has been sent
    	
 	// read the incoming data
-	char comando = Serial.read();
+	String comando = Serial.readString();
 
 	// risponde positivamente alla ricezione
-  	if (comando) Serial.println("ack"); 
-  	
+  	if (comando) {
+  	  Serial.print(comando);
+  	  Serial.println("  ack"); 
+  	}
+  int angolo = comando.toInt(); 	
 	
-	serX.write(comando); 
+	serX.write(angolo); 
 
 }
 delay(100); // delay for 1/10 of a second
