@@ -4,10 +4,7 @@ ardSerial = Serial('/dev/ttyACM0',9600)
 
 def invia(comando):
 	
-	risposta = 0
+	ardSerial.write(comando)
+	risposta = ardSerial.readline()
+	print risposta
 	
-	while (risposta!='ack'):
-		ardSerial.write(comando)
-		risposta = ardSerial.readline()
-		print risposta
-		

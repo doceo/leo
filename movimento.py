@@ -1,5 +1,6 @@
 #!/usr/bin/python
-
+# al momento rimane non utilizzata
+# ma lasciamo in stand by questo modulo per il futuro
 
 def gira(pm):
 

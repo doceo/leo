@@ -3,7 +3,7 @@
 
 import subprocess
 from face import *
-from movimento import *
+#from movimento import *
 from seriale import *
 #import window
  
@@ -30,12 +30,13 @@ while (cv.WaitKey(15)==-1):
 		#print dist
 		
 		print face[2]
+
 		#il servo motore dell'assex 
-		rotazione = gira(face[2])
-		print rotazione
+#		rotazione = gira(face[2])
+#		print rotazione
 		
-		#inviamo alla porta seriale l'ascissa del punto medio
-		invia(rotazione)
+		#inviamo alla porta seriale le coordinate del punto medio
+		invia(str(face[2]))
 		
 		if (dist < distHold - 9):
 			print "stai andando via!"
