@@ -1,3 +1,6 @@
+#funzione che serve solo per testare la funzionalità server
+
+
 import socket
 import sys
 

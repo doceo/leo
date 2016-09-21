@@ -6,10 +6,19 @@ from face import *
 #from movimento import *
 from seriale import *
 #import window
- 
+
+import threading
+from ascolta import *
+
 #----------
 # M A I N
 #----------
+
+
+server = threading.Thread(name='server', target=ascolta)
+server.setDaemon(True)
+server.start()
+
 
 
 capture = cv.CaptureFromCAM(0)
