@@ -1,3 +1,6 @@
+#serverThread.py 
+
+
 import threading
 import time
 
@@ -16,9 +19,13 @@ def stopThread(a_thread):
     a_thread.join()
     print "\n", a_thread.getName(), "Stopped",
 
+#funzione che permette di verificare se ci sono dati in ricezione
+
 def askThread(a_thread):
     print "\n", a_thread.getName(), "current string is", a_thread.getValue(),
 
+
+#classe ereditata da threading.Thread per la gestione del server in ascolto sulla porta 8888
 
 class ServerThread(threading.Thread):
     def __init__(self, threadID, name, debug=False):
@@ -67,7 +74,8 @@ class ServerThread(threading.Thread):
 						data = connection.recv(16)
             					print >> sys.stderr, 'received "%s"' % data
             					if (data):
-            					#print >>sys.stderr, 'sending data back to the client'
+									#restituisce i dati ricevuti al client (come funzione di test)            					
+            					print >>sys.stderr, 'sending data back to the client'
                						connection.sendall(data)
                						self.msg = data
             					else:
@@ -79,7 +87,8 @@ class ServerThread(threading.Thread):
         				connection.close()
 
 
-
+#il codice seguente parte solo in fase di test, quindi se l'interprete 
+#lancia in modo autonomo questo file
 
 if __name__=='__main__':
 	

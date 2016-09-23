@@ -7,18 +7,14 @@ from face import *
 from seriale import *
 #import window
 
-import threading
-from ascolta import *
+
 
 #----------
 # M A I N
 #----------
 
-
-server = threading.Thread(name='server', target=ascolta)
-server.setDaemon(True)
-server.start()
-
+#avviamo il thread che in autonomia gestisce il server che si mette in ascolto di input
+server = startThread(None)
 
 
 capture = cv.CaptureFromCAM(0)
@@ -52,4 +48,5 @@ while (cv.WaitKey(15)==-1):
 		
 		distHold = dist
 		
+server.stop()
 cv.ReleaseCapture(capture)
