@@ -75,9 +75,11 @@ class ServerThread(threading.Thread):
             					print >> sys.stderr, 'received "%s"' % data
             					if (data):
 									#restituisce i dati ricevuti al client (come funzione di test)            					
-            					print >>sys.stderr, 'sending data back to the client'
-               						connection.sendall(data)
-               						self.msg = data
+											print >>sys.stderr, 'sending data back to the client'
+											connection.sendall(data)
+											
+											#salvo la stringa nell'attributo di istanza											
+											self.msg = data
             					else:
                						print >>sys.stderr, 'no more data from', client_address
                						break
