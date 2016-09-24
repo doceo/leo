@@ -6,7 +6,7 @@ from face import *
 #from movimento import *
 from seriale import *
 #import window
-
+from serverThread.py import *
 
 
 #----------
@@ -47,6 +47,10 @@ while (cv.WaitKey(15)==-1):
 			print "stai andando via!"
 		
 		distHold = dist
+		
+		if(server.getValue()):
+		
+			invia(str(askThread(server)))
 		
 server.stop()
 cv.ReleaseCapture(capture)
