@@ -30,10 +30,7 @@ Serial.begin(9600); // set the baud rate
 void loop() {
 
 
-//  for (int i= 0; i<640; i=i+10){
-//     for(int j=0; j< 420; j=j+10){
-
-        msg = Serial.readString();
+        if(Serial.available()) msg = Serial.readString();
 
         int j=random(0,420);
         int i=random(0,640);
@@ -71,11 +68,7 @@ void loop() {
             oldMsg=msg;
         }
        
-//     }
-//  }
 
-	// risponde positivamente alla ricezione
-//}
 
-delay(100); // delay for 1/10 of a second
+delay(900); // delay for 1/10 of a second
 }
