@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Slider - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+   $( function() {
+    $( "#slider-vertical" ).slider({
+      orientation: "vertical",
+      range: "min",
+      min: 0,
+      max: 420,
+      valy: 60,
+      slide: function( event, ui ) {
+        $( "#asseY" ).val( ui.valy );
+      }
+    });
+   $( "#slider-horizontal" ).slider({
+      orientation: "horizontal",
+      range: "min",
+      min: 0,
+      max: 640,
+      valx: 60,
+      slide: function( event, ui ) {
+        $( "#asseX" ).val( ui.valx );
+      }
+    });
+    $( "#asseX" ).val( $( "#slider-orizontal" ).slider( "valx" ) );
+    $( "#asseY" ).val( $( "#slider-vertical" ).slider( "valy" ) );
+  } );
+  </script>
+</head>
+<body>
+
+ 
+<div id="slider-horizontal" style="height:60px;"></div>
+ 
+<br>
+ 
+<div id="slider-vertical" style="width:60px;"></div>
+
+
+ 
+</body>
+</html>
