@@ -1,50 +1,75 @@
-//#include <AFMotor.h>
 
 #include <Servo.h>
 
 int triggerPort=A3;    // Il trigger viene collegato alla porta A3 .
 int echoPort = A5;     // il sensore echo viene collegato alla porta A5 .
 
+int distanza;
+
 Servo serX;
 Servo serY;
 
-String msg;
+String msg, oldMsg;
 char messaggio[10];
-//AF_DCMotor motorS(1);      // Motore sinistro collegato al pin 1 . 
-//AF_DCMotor motorD(4);      // Motore destro collegato al pin 4 .
 
 int X, angX;
 int Y, angY;
 
+boolean go = false;
 
 void setup() {
 Serial.begin(9600); // set the baud rate
-serX.attach(9);
-serY.attach(10);
+
+  serX.attach(9);
+  serY.attach(10);
+  
+  serX.write(90);
+  serY.write(90);
+
+  serX.writeMicroseconds(2000);
+  serY.writeMicroseconds(700);
 
 }
 void loop() {
 
 
-if(Serial.available()){ // only send data back if data has been sent
-   	
-	// read the incoming data
-	msg = Serial.readString();
-
-	// risponde positivamente alla ricezione
-  	if (msg) {
-  	  Serial.print(msg);
-  	  Serial.println("  ack"); 
-          msg.toCharArray(messaggio, 10);
-          
-          sscanf (messaggio,"(%d, %d)", &X, &Y);
- 
-          angX = map (X, 0, 640, 0, 180);
-          angY = map (Y, 0, 420, 0, 180);
-          
-	  serX.write(angX);
-	  serY.write(angY);         
+  if(Serial.available()) {
+    
+    msg = Serial.readString();
+    if(msg.equals("start")){
+      go = true;
       }
-}
-delay(100); // delay for 1/10 of a second
+    if(msg.equals("stop")){
+      go = false;
+      }
+    }
+   
+
+  if (go == true) muoviRand();
+   
+  if (msg!=oldMsg) {
+
+      Serial.print(msg);
+      Serial.println("  ack"); 
+      msg.toCharArray(messaggio, 10);
+      
+      sscanf (messaggio,"(%d, %d)", &X, &Y);
+
+      angX = map (X, 0, 640, 30, 150);
+      angY = map (Y, 0, 420, 60, 130);
+      
+      serX.write(angX);
+      serY.write(angY);
+  
+      delay(3000);
+      oldMsg=msg;
+      
+      distanza = dist();
+      Serial.println("D.");
+      Serial.print(distanza);      
+  }
+       
+
+
+delay(900); // delay for 1/10 of a second
 }

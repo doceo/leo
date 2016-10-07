@@ -6,10 +6,15 @@ from face import *
 #from movimento import *
 from seriale import *
 #import window
- 
+from serverThread.py import *
+
+
 #----------
 # M A I N
 #----------
+
+#avviamo il thread che in autonomia gestisce il server che si mette in ascolto di input
+server = startThread(None)
 
 
 capture = cv.CaptureFromCAM(0)
@@ -43,4 +48,9 @@ while (cv.WaitKey(15)==-1):
 		
 		distHold = dist
 		
+		if(server.getValue()):
+		
+			invia(str(askThread(server)))
+		
+server.stop()
 cv.ReleaseCapture(capture)
