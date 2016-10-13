@@ -2,4 +2,16 @@
 
 cv 
 espeak -v it "buon viaggio"
-libreria AFMotor
+
+per far comunicare picamera con opencv serve una libreria appositamente redatta. le immagini elaborare con openCV sono vettori, 
+quindi picamera deve produrre immagini dello stesso formato 
+pip install "picamera[array]"
+
+
+OTTIMIZZAZIONE
+per incrementare le prestazioni è possibile gestire l'acquisizione da webcam in un thread separato come suggerito da:
+
+http://www.pyimagesearch.com/2015/12/21/increasing-webcam-fps-with-python-and-opencv/
+
+
+
