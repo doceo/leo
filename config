@@ -2,7 +2,7 @@
 
 cv 
 espeak -v it "buon viaggio"
-libreria AFMotor
+
 
 per far comunicare picamera con opencv serve una libreria appositamente redatta. le immagini elaborare con openCV sono vettori, 
 quindi picamera deve produrre immagini dello stesso formato 
