@@ -20,7 +20,7 @@ class faceThread:
 		self.frame = None
 		self.stopped = False
     
-  def start(self):
+ 	def start(self):
 		# start the thread to read frames from the video stream
 		Thread(target=self.update, args=()).start()
 		return self
@@ -41,7 +41,7 @@ class faceThread:
 				self.camera.close()
 				return
 	
-  def read(self):
+  	def read(self):
 		# return the frame most recently read
 		return self.frame
  
