@@ -3,7 +3,7 @@
 # http://www.lucaamore.com/?p=638
 
 
-import cv
+import cv2
 import time
 import Image
 import math
@@ -16,38 +16,31 @@ def DetectFace(image, faceCascade):
     haar_scale = 1.1
     min_neighbors = 3
     haar_flags = 0
- 
+
+    width = 640
+    height = 420
+     
     # Allocate the temporary images
-    grayscale = cv.CreateImage((image.width, image.height), 8, 1)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 #    print image.width
 #    print image.height
 
     points = 0
 
-    smallImage = cv.CreateImage(
-            (
-                cv.Round(image.width / image_scale),
-                cv.Round(image.height / image_scale)
-            ), 8 ,1)
- 
-    # Convert color input image to grayscale
-    cv.CvtColor(image, grayscale, cv.CV_BGR2GRAY)
- 
-    # Scale input image for faster processing
-    cv.Resize(grayscale, smallImage, cv.CV_INTER_LINEAR)
- 
-    # Equalize the histogram
-    cv.EqualizeHist(smallImage, smallImage)
- 
+
     # Detect the faces
-    faces = cv.HaarDetectObjects(
-            smallImage, faceCascade, cv.CreateMemStorage(0),
-            haar_scale, min_neighbors, haar_flags, min_size
-        )
- 
+    faces =  faceCascade.detectMultiScale(
+        	gray,
+        	scaleFactor=1.1,
+        	minNeighbors=5,
+        	minSize=(30, 30),
+        	flags=cv2.cv.CV_HAAR_SCALE_IMAGE
+    	)
+    print "fuori if"
     # If faces are found
-    if faces:
-        for ((x, y, w, h), n) in faces:
+  
+    for (x, y, w, h) in faces:
+	    print "dentro for"
             # the input to cv.HaarDetectObjects was resized, so scale the
             # bounding box of each face and convert it to two CvPoints
             pt1 = (int(x * image_scale), int(y * image_scale))
@@ -55,15 +48,19 @@ def DetectFace(image, faceCascade):
 	    
 	    
 	    #definisco il punto medio e la distanza (non affidabile ancora)
-	    ptm = ((pt1[0]+pt2[0])/2 ,(pt1[1]+pt2[1])/2)
-	    dist = math.sqrt((pt2[0]-pt1[0])**2 + (pt2[1]-pt1[1])**2)
-	    dist = int(dist)
+            ptm = ((pt1[0]+pt2[0])/2 ,(pt1[1]+pt2[1])/2)
+            dist = math.sqrt((pt2[0]-pt1[0])**2 + (pt2[1]-pt1[1])**2)
+            dist = int(dist)
 		#costruisco una tupla di tuple con gli elementi costruiti
         
-	    points = (pt1, pt2, ptm, dist)
+            points = (pt1, pt2, ptm, dist)
 	    
-        cv.Rectangle(image, pt1, pt2, cv.RGB(255, 0, 0), 5, 8, 0)
-        grayscale = cv.CreateImage((image.width, image.height), 8, 1)
+            cv2.rectangle(image, pt1, pt2, (255, 0, 0),2)
+  #          grayscale = cv2.CreateImage((width, height), 8, 1)
+	    cv2.imshow("rectangle", image)
     
-    cv.ShowImage("computer vision", image)     
+    cv2.imshow("computer vision", image)     
+   
+
+    print "prima di return"
     return points
