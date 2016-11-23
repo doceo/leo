@@ -1,6 +1,9 @@
 from serial import *
 
-ardSerial = Serial('/dev/ttyACM0',9600)
+try:
+	ardSerial = Serial('/dev/ttyACM0',9600)
+except:
+	print "porta seriale sbagliata"
 
 def invia(comando):
 	
