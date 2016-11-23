@@ -1,7 +1,5 @@
 #face
 
-# http://www.lucaamore.com/?p=638
-
 
 import cv2
 import time

@@ -6,8 +6,9 @@ from face import *
 from seriale import *
 #import window
 from serverThread import *
-
-#libreria picamera e picamera.array servono a acquisire dalla webcam un formato array di tipo nunpy per essere trattato da openCV 
+"""
+libreria picamera e picamera.array servono a acquisire dalla webcam un formato array di tipo nunpy per essere trattato da openCV 
+"""
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 
@@ -58,13 +59,16 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         	print face[2]
 
 		#inviamo alla porta seriale, quindi ad arduino, le coordinate del punto medio
-        	invia(str(face[2]))
+		try:
+        		invia(str(face[2]))
 		
 		#controlla il thread del server se ha ricevuto un input esterno
-        	if(server.getValue()):
+        		if(server.getValue()):
 		
-                	invia(str(askThread(server)))
+                		invia(str(askThread(server)))
+		except:
+			print "nessun arduino collegato"
 
 #chiude il server in ascolto
-server.stop()
-cv.ReleaseCapture(capture)
+#server.stop()
+video_capture.release()
