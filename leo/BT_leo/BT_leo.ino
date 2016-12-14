@@ -9,7 +9,7 @@ int distanza;
 
 Servo serX;
 Servo serY;
-SoftwareSerial BtSerial(5, 6); // RX, TX
+SoftwareSerial btSerial(5, 6); // RX, TX
 
 String msg, oldMsg, btMsg;
 char messaggio[10];
@@ -21,7 +21,7 @@ boolean go = false;
 
 void setup() {
   Serial.begin(9600); // set the baud rate
-  BtSerial.begin(9600);
+  btSerial.begin(9600);
 
   serX.attach(9);
   serY.attach(10);
@@ -47,15 +47,15 @@ void loop() {
       }
   }
   
-   if (mySerial.available()) {
-      btMsg=mySerial.read();
+   if (btSerial.available()) {
+      btMsg=btSerial.read();
       delay(10);
   }
   
   if (go == true){ 
     muoviRand();
     }else{
-      stop();
+      stopMov();
       }
    
   if (msg!=oldMsg) {
@@ -83,8 +83,8 @@ void loop() {
    }
 
    if (btMsg){
-    btMsg.toCharArray(messaggio, 10);
-    if (btMsg == beep)Serialln.print("beep");
+ //   btMsg.toCharArray(messaggio, 10);
+    if (btMsg == 'beep')Serial.println("beep");
    
    }
 
