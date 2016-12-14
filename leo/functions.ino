@@ -63,7 +63,7 @@ void muoviRand() {
       serX.write(angX);
       serY.write(angY);
       
-      delay(50);      
+      delay(100);      
 
 }
 

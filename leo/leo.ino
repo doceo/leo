@@ -26,7 +26,7 @@ Serial.begin(9600); // set the baud rate
   serX.write(90);
   serY.write(90);
 
-  serX.writeMicroseconds(2000);
+  serX.writeMicroseconds(700);
   serY.writeMicroseconds(700);
 
 }
@@ -71,5 +71,5 @@ void loop() {
        
 
 
-delay(900); // delay for 1/10 of a second
+//delay(900); // delay for 1/10 of a second
 }
