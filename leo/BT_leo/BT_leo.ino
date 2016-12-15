@@ -84,7 +84,7 @@ void loop() {
 
    if (btMsg){
  //   btMsg.toCharArray(messaggio, 10);
-    if (btMsg == 'beep')Serial.println("beep");
+    if (btMsg == "beep")Serial.println("beep");
    
    }
 
