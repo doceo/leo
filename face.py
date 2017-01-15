@@ -38,27 +38,15 @@ def DetectFace(image, faceCascade):
     # If faces are found
   
     for (x, y, w, h) in faces:
-	    print "dentro for"
-            # the input to cv.HaarDetectObjects was resized, so scale the
-            # bounding box of each face and convert it to two CvPoints
-            pt1 = (int(x * image_scale), int(y * image_scale))
-            pt2 = (int((x + w) * image_scale), int((y + h) * image_scale))
 	    
 	    
-	    #definisco il punto medio e la distanza (non affidabile ancora)
-            ptm = ((pt1[0]+pt2[0])/2 ,(pt1[1]+pt2[1])/2)
-            dist = math.sqrt((pt2[0]-pt1[0])**2 + (pt2[1]-pt1[1])**2)
-            dist = int(dist)
-		#costruisco una tupla di tuple con gli elementi costruiti
-        
-            points = (pt1, pt2, ptm, dist)
-	    
-            cv2.rectangle(image, pt1, pt2, (255, 0, 0),2)
+            cv2.rectangle(image, (x,y), (x+w, y+h), (255, 0, 0),2)
+	    points=(x,y)
+	    pm = ((x+x+w/2), (y+y+h/2))
+            print pm
   #          grayscale = cv2.CreateImage((width, height), 8, 1)
-	    cv2.imshow("rectangle", image)
-    
-    cv2.imshow("computer vision", image)     
-   
+	    cv2.imwrite("rectangle.jpg", image)
+    	    cv2.imshow("face", image)
 
     print "prima di return"
     return points

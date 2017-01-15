@@ -19,56 +19,57 @@ import cv2
 # M A I N
 #----------
 
-
-#avviamo il thread che in autonomia ascolta possibili input esterni. i client di test sono nella cartella /client
-
-#server = startThread(None)
-
+"""
+questa funzionalita non ancora attiva lancia un server che si mette in ascolto sulla porta 9000
+server = startThread(None)
+"""
 
 
 camera = PiCamera()
 camera.resolution =(640, 480)
 camera.framerate = 32
 rawCapture = PiRGBArray(camera, size=(640,480))
-	# allow the camera to warmup
+
 time.sleep(0.1)
 	
 faceCascade = cv2.CascadeClassifier("/usr/share/opencv/haarcascades/haarcascade_frontalface_alt.xml")
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-	# grab the raw NumPy array representing the image, then initialize the timestamp
-	# and occupied/unoccupied text
-	image = frame.array
+# grab the raw NumPy array representing the image, then initialize the timestamp
+# and occupied/unoccupied text
+        image = frame.array
     
 	cv2.imshow("Frame", image)
+	cv2.imwrite("frame.jpg", image)
  
 	# clear the stream in preparation for the next frame
-	rawCapture.truncate(0)
+        rawCapture.truncate(0)
 
 	# dentro questo ciclo dobbiamo andare a richiamare la funzione face
 	
-	print "visualizzo immagine e richiamo funzione"
+        print "visualizzo immagine e richiamo funzione"
 
-	face = DetectFace(image, faceCascade)
+        face = DetectFace(image, faceCascade)
 
 
-    	if face:
+        if face:
         	print "ciao!"
 		
 		#stampa a monitor le coordinate del punto medio del volto
-        	print face[2]
+        	print face
 
 		#inviamo alla porta seriale, quindi ad arduino, le coordinate del punto medio
-		try:
-        		invia(str(face[2]))
+                try:
+                        invia(str(face[2]))
 		
 		#controlla il thread del server se ha ricevuto un input esterno
-        		if(server.getValue()):
+                        if(server.getValue()):
 		
-                		invia(str(askThread(server)))
-		except:
-			print "nessun arduino collegato"
+                                invia(str(askThread(server)))
+                except:
+                        print "nessun arduino collegato"
 
 #chiude il server in ascolto
 #server.stop()
-video_capture.release()
+
+
